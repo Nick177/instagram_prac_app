@@ -10,7 +10,9 @@ import UIKit
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var vc: UIImagePickerController = UIImagePickerController()
+    @IBOutlet weak var selectedImage: UIImageView!
+    @IBOutlet weak var captionField: UITextField!
+    let vc: UIImagePickerController = UIImagePickerController()
     
     override func viewDidAppear(_ animated: Bool) {
        // print("appear")
@@ -24,9 +26,29 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedImage.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(gesture:)))
+        selectedImage.addGestureRecognizer(tapGesture)
+        
+        
         //vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
+        /*
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is available 📸")
+            vc.sourceType = UIImagePickerControllerSourceType.camera
+        } else {
+            print("Camera 🚫 available so we will use photo library instead")
+            vc.sourceType = .photoLibrary
+        }
+        
+        self.present(vc, animated: true, completion: nil)
+        */
+    }
+    
+    func imageTapped(gesture: UIGestureRecognizer) {
+        //print("here")
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is available 📸")
