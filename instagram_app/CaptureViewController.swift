@@ -12,6 +12,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var captionField: UITextField!
+    
     let vc: UIImagePickerController = UIImagePickerController()
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,12 +71,31 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
                                didFinishPickingMediaWithInfo info: [String : Any]) {
         // Get the image captured by the UIImagePickerController
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        //let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        
+        selectedImage.image = resize(image: originalImage, newSize: CGSize(width: 1000, height: 1000))
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onSubmit(_ sender: Any) {
+        Post.postUserImage(image: selectedImage.image!, withCaption: captionField.text) { (success: Bool, error: Error?) in
+            // code
+            print("success")
+        }
+    }
+    
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: newSize.width, height: newSize.height)))
+        resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
 
 }

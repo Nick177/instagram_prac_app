@@ -10,6 +10,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var postCaption: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
