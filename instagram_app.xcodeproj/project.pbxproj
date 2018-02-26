@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		585CF89A2043853700362039 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585CF8992043853700362039 /* DetailsViewController.swift */; };
 		586B6279203B957400141821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586B6278203B957400141821 /* AppDelegate.swift */; };
 		586B627B203B957400141821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586B627A203B957400141821 /* ViewController.swift */; };
 		586B627E203B957400141821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 586B627C203B957400141821 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		2445F53D3C3C7DE824DEF5BD /* Pods_instagram_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_instagram_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D99D123FADA2E167B771054 /* Pods_instagram_appUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_instagram_appUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		585CF8992043853700362039 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		586B6275203B957400141821 /* instagram_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagram_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		586B6278203B957400141821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		586B627A203B957400141821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				5884D528203D14CE000E93F5 /* HomeViewController.swift */,
 				5884D524203CF60F000E93F5 /* LoginViewController.swift */,
 				5884D526203D0FCC000E93F5 /* ProfileViewController.swift */,
+				585CF8992043853700362039 /* DetailsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -431,11 +434,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-instagram_app/Pods-instagram_app-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/ParseUI/ParseUI.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParseUI.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,6 +501,7 @@
 			files = (
 				587228A820421EF6000BBC17 /* PostTableViewCell.swift in Sources */,
 				5884D529203D14CE000E93F5 /* HomeViewController.swift in Sources */,
+				585CF89A2043853700362039 /* DetailsViewController.swift in Sources */,
 				5884D52B203D1ED0000E93F5 /* CaptureViewController.swift in Sources */,
 				587228AA2042557D000BBC17 /* Post.swift in Sources */,
 				5884D525203CF60F000E93F5 /* LoginViewController.swift in Sources */,

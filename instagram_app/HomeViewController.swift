@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class HomeViewController: UIViewController, UITableViewDataSource {
     
@@ -45,13 +46,12 @@ class HomeViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
         
         cell.postCaption.text = self.posts[indexPath.row].caption
-        let image = Post.getImageFromPFFile(file: self.posts[indexPath.row].media)
+        cell.postImageView.file = self.posts[indexPath.row].media
+        cell.postImageView.loadInBackground()
         
-        if image != nil {
-            cell.postImageView.image = image
-        } else {
-            print("Not working")
-        }
+        //let file = self.posts[indexPath.row].media
+        
+        
         
         return cell
     }
@@ -79,6 +79,15 @@ class HomeViewController: UIViewController, UITableViewDataSource {
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         fetchLast20Posts()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let post = self.posts[indexPath.row]
+            let detailsViewController = segue.destination as! DetailsViewController
+            detailsViewController.post = post
+        }
     }
     
     

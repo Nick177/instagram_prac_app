@@ -33,11 +33,23 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
             if let error = error {
                 print("user log in failed: \(error.localizedDescription)")
+                self.displayAlert(errorMsg: error.localizedDescription)
             } else {
                 print("user logged in sucessfully")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
+    }
+    
+    func displayAlert(errorMsg: String) {
+        // create the alert
+        let alert = UIAlertController(title: "Login Failed", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+    
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+    
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func onSignUp(_ sender: Any) {

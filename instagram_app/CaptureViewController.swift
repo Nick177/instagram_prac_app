@@ -9,6 +9,7 @@
 import UIKit
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var captionField: UITextField!
@@ -80,10 +81,28 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func onSubmit(_ sender: Any) {
+        
+        if selectedImage.image == #imageLiteral(resourceName: "image_placeholder")
+        || captionField.text == "" {
+            displayAlert(errorMsg: "Please provide an image and a caption")
+            return
+        }
+        self.activityIndicator.startAnimating()
         Post.postUserImage(image: selectedImage.image!, withCaption: captionField.text) { (success: Bool, error: Error?) in
             // code
-            print("success")
+            if let error = error {
+                print("error: \(error.localizedDescription)")
+            } else {
+                print("success")
+            }
+            self.activityIndicator.stopAnimating()
+            self.setupDefault()
         }
+    }
+    
+    func setupDefault() {
+        self.captionField.text = ""
+        self.selectedImage.image = #imageLiteral(resourceName: "image_placeholder")
     }
     
     func resize(image: UIImage, newSize: CGSize) -> UIImage {
@@ -96,6 +115,17 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+    
+    func displayAlert(errorMsg: String) {
+        // create the alert
+        let alert = UIAlertController(title: "Submission failed", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

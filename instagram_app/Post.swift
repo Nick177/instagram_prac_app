@@ -65,21 +65,5 @@ class Post: PFObject, PFSubclassing {
         return nil
     }
     
-    class func getImageFromPFFile(file: PFFile?) -> UIImage? {
-        var result: UIImage?
-        if let photo = file {
-            photo.getDataInBackground(block: {
-                PFDataResultBlock in
-                if PFDataResultBlock.1 == nil {//PFDataResultBlock.1 is Error
-                    if let image = UIImage(data:PFDataResultBlock.0!){
-                        //PFDataResultBlock.0 is Data
-                        //photoCell.attachedPicture.image = image
-                        result = image
-                    }
-                    
-                }
-            })
-        }
-        return result
-    }
+    
 }
